@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DailyPlan</string>
+    <string name="task_title">Title:</string>
+    <string name="task_outcome">Outcome:</string>
+    <string name="task_first_action">First action:</string>
+    <string name="task_basket">Basket:</string>
+    <string name="task_category">Category:</string>
+    <string name="task_category_desc">Group similar tasks</string>
+    <string name="task_action_desc">Starting activity</string>
+    <string name="task_outcome_desc">Effect of completing task</string>
+    <string name="task_title_desc">Task title</string>
+    <string name="task_set_reminder">Set reminder</string>
+    <string name="task_reminder_set_at">Reminder set at:</string>
+    <string name="task_date_placeholder">placeholder</string>
+</resources>
