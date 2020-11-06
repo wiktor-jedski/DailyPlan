@@ -40,4 +40,19 @@ public class TaskRepository {
             return null;
         }
     }
+
+    private static class deleteAsyncTask extends AsyncTask<Task, Void, Void> {
+
+        private TaskDao mAsyncTaskDao;
+
+        deleteAsyncTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            mAsyncTaskDao.deleteTask(tasks[0]);
+            return null;
+        }
+    }
 }

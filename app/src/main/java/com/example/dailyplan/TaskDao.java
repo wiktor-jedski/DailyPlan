@@ -4,6 +4,7 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -21,4 +22,7 @@ public interface TaskDao {
 
     @Query("SELECT * FROM tasks WHERE id = :id")
     LiveData<Task> loadTaskById(int id);
+
+    @Delete
+    void deleteTask(Task task);
 }
