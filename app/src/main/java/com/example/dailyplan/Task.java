@@ -3,6 +3,7 @@ package com.example.dailyplan;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tasks")
@@ -20,8 +21,14 @@ public class Task {
     @ColumnInfo(name = "priority")
     private String mPriority;
 
+    @Ignore
     public Task(@NonNull int id, @NonNull String task, @NonNull String priority) {
         this.id = id;
+        this.mTask = task;
+        this.mPriority = priority;
+    }
+
+    public Task(@NonNull String task, @NonNull String priority) {
         this.mTask = task;
         this.mPriority = priority;
     }
