@@ -21,6 +21,7 @@ public class TaskRepository {
     LiveData<List<Task>> getAllTasks() {
         return mAllTasks;
     }
+    LiveData<Integer> getTaskCount() {return mTaskCount;}
 
     public void insertTask(Task task) {
         new insertAsyncTask(mTaskDao).execute(task);
@@ -55,4 +56,5 @@ public class TaskRepository {
             return null;
         }
     }
+
 }

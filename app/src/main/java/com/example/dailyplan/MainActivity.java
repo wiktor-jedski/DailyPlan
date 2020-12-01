@@ -3,6 +3,7 @@ package com.example.dailyplan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -17,11 +18,15 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.util.List;
+import java.util.Observer;
+
 public class MainActivity extends AppCompatActivity {
 
     MaterialCalendarView calendarView;
     private TaskViewModel mTaskViewModel;
     public static final int NEW_TASK_ACTIVITY_REQUEST_CODE = 1;
+    private LiveData<List<Task>> allTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +36,26 @@ public class MainActivity extends AppCompatActivity {
 
         // just adding a comment to check how git works
         mTaskViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(TaskViewModel.class);
+        //Observer<>
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 // start DayActivity with appropriate date
+
+                // if selected change to 1
+                // get the database
+                allTasks = mTaskViewModel.getAllTasks();
+                // check if there is a Task with Task.date = date
+/*                for (int i = 0; ; ) {
+
+                }
+                // if not, start NewTaskActivity and pass date as extra
+                // if yes, edit this activity*/
             }
         });
 
+        // FAB that starts NewTaskActivity in bottom right
         FloatingActionButton fabAdd = findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // FAB that starts browsing activity
         FloatingActionButton fabBrowse = findViewById(R.id.fab_browse);
         fabBrowse.setOnClickListener(new View.OnClickListener() {
             @Override

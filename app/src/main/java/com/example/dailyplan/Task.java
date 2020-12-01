@@ -21,6 +21,9 @@ public class Task {
     @ColumnInfo(name = "priority")
     private String mPriority;
 
+    // implement Created Date (?)
+    // implement Planned Date
+
     @Ignore
     public Task(@NonNull int id, @NonNull String task, @NonNull String priority) {
         this.id = id;
