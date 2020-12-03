@@ -23,6 +23,9 @@ public interface TaskDao {
     @Query("SELECT * FROM tasks WHERE id = :id")
     LiveData<Task> loadTaskById(int id);
 
+    @Query("SELECT COUNT (*) FROM tasks")
+    LiveData<Integer> getTaskCount();
+
     @Delete
     void deleteTask(Task task);
 }

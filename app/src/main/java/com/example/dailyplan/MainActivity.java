@@ -18,6 +18,8 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import org.threeten.bp.LocalDate;
+
 import java.util.List;
 import java.util.Observer;
 
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     MaterialCalendarView calendarView;
     private TaskViewModel mTaskViewModel;
     public static final int NEW_TASK_ACTIVITY_REQUEST_CODE = 1;
-    private LiveData<List<Task>> allTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 // start DayActivity with appropriate date
-
                 // if selected change to 1
                 // get the database
-                allTasks = mTaskViewModel.getAllTasks();
                 // check if there is a Task with Task.date = date
-/*                for (int i = 0; ; ) {
-
+                /*for (int i = 0; ; ) {
                 }
-                // if not, start NewTaskActivity and pass date as extra
-                // if yes, edit this activity*/
+                if not, start NewTaskActivity and pass date as extra
+                if yes, edit this activity*/
+                //toast date
+                Toast.makeText(MainActivity.this, date.getDate().toString() , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -80,9 +80,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        String created = data.getStringExtra(NewTaskActivity.EXTRA_CREATE_DATE);
         if (requestCode == NEW_TASK_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Task task = new Task(data.getStringExtra(NewTaskActivity.EXTRA_TITLE), data.getStringExtra(NewTaskActivity.EXTRA_PRIORITY));
+            Task task = new Task(data.getStringExtra(NewTaskActivity.EXTRA_TITLE), data.getStringExtra(NewTaskActivity.EXTRA_PRIORITY), LocalDate.parse(created), null);
             mTaskViewModel.insertTask(task);
+            Toast.makeText(MainActivity.this, "Added task with date: " + created, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "empty task", Toast.LENGTH_SHORT).show();
         }

@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import org.threeten.bp.LocalDate;
+
 public class NewTaskActivity extends AppCompatActivity {
 
     private EditText mEditTitle;
@@ -20,6 +22,7 @@ public class NewTaskActivity extends AppCompatActivity {
     private int clicked = 0;
     public static final String EXTRA_TITLE = "com.example.android.dailyplan.TITLE";
     public static final String EXTRA_PRIORITY = "com.example.android.dailyplan.PRIORITY";
+    public static final String EXTRA_CREATE_DATE = "com.example.android.dailyplan.CREATE_DATE";
     private ImageButton button_A;
     private ImageButton button_B;
     private ImageButton button_C;
@@ -51,8 +54,10 @@ public class NewTaskActivity extends AppCompatActivity {
                 } else {
                     String title = mEditTitle.getText().toString();
                     String priority = mEditPriority.getText().toString();
+                    LocalDate current = LocalDate.now();
                     replyIntent.putExtra(EXTRA_TITLE, title);
                     replyIntent.putExtra(EXTRA_PRIORITY, priority);
+                    replyIntent.putExtra(EXTRA_CREATE_DATE, current);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

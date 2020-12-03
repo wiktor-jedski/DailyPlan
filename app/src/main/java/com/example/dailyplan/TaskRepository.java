@@ -11,11 +11,13 @@ public class TaskRepository {
 
     private TaskDao mTaskDao;
     private LiveData<List<Task>> mAllTasks;
+    private LiveData<Integer> mTaskCount;
 
     TaskRepository(Application application) {
         TaskDatabase db = TaskDatabase.getDatabase(application);
         mTaskDao = db.taskDao();
         mAllTasks = mTaskDao.getAllTasks();
+        mTaskCount = mTaskDao.getTaskCount();
     }
 
     LiveData<List<Task>> getAllTasks() {
